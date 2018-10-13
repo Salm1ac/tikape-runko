@@ -19,7 +19,7 @@
             <ul>
                 <li th:each="kysymys: ${kysymykset}" th:if="${kysymys.aiheId} == ${aihe.id}">
                     <a th:href="@{~/kysymykset/{id}(id=${kysymys.id})}">
-                        <span th:text="${kysymys.nimi}">Tässä pitäisi olla kysymys</span>
+                        <span th:text="${kysymys.teksti}">Tässä pitäisi olla kysymys</span>
                     </a>
                     <form><input type="submit" value="Poista"/></form>
                 </li>
