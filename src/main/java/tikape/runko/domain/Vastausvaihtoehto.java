@@ -22,6 +22,22 @@ public class Vastausvaihtoehto {
         this.teksti = teksti;
         this.oikein = oikein;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Integer getKysymysId() {
+        return kysymysId;
+    }
+
+    public String getTeksti() {
+        return teksti;
+    }
+
+    public boolean isOikein() {
+        return oikein;
+    }
     
     
     

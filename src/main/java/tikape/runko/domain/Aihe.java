@@ -20,6 +20,18 @@ public class Aihe {
         this.kurssiId = kurssiId;
         this.nimi = nimi;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Integer getKurssiId() {
+        return kurssiId;
+    }
+
+    public String getNimi() {
+        return nimi;
+    }
     
     
 }

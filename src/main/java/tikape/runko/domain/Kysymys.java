@@ -20,6 +20,18 @@ public class Kysymys {
         this.aiheId = aiheId;
         this.teksti = teksti;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Integer getAiheId() {
+        return aiheId;
+    }
+
+    public String getTeksti() {
+        return teksti;
+    }
     
     
 }

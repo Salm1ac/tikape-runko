@@ -18,6 +18,14 @@ public class Kurssi {
         this.id = id;
         this.nimi = nimi;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getNimi() {
+        return nimi;
+    }
     
     
     
