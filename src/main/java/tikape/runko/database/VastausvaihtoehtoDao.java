@@ -70,6 +70,29 @@ public class VastausvaihtoehtoDao implements Dao<Vastausvaihtoehto, Integer> {
 
         return vastausvaihtoehdot;
     }
+    
+    public List<Vastausvaihtoehto> findAllMatchingKysymys(Integer kysymysId) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Vastausvaihtoehto "
+                + "WHERE Vastausvaihtoehto.kysymys_id = ?");
+        stmt.setInt(1, kysymysId);
+
+        ResultSet rs = stmt.executeQuery();
+        List<Vastausvaihtoehto> vastausvaihtoehdot = new ArrayList<>();
+        while (rs.next()) {
+            Integer id = rs.getInt("id");
+            String teksti = rs.getString("teksti");
+            Boolean oikein = rs.getBoolean("oikein");
+
+            vastausvaihtoehdot.add(new Vastausvaihtoehto(id, kysymysId, teksti, oikein));
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return vastausvaihtoehdot;
+    }
 
     @Override
     public void delete(Integer key) throws SQLException {

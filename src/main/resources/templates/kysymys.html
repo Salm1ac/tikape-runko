@@ -1,0 +1,63 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    
+    <head>
+        <title th:text="${kysymys.teksti}">Kysymys</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        
+        <table>
+          <tr>
+            <td>
+                Kurssi: <span th:text="${kurssi}">Tässä pitäisi olla kurssin nimi</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+                Aihepiiri: <span th:text="$aihe">Tässä pitäisi olla aiheen nimi</span>
+            </td>
+          </tr>
+        </table>
+        
+        <ul>
+            <li th:each="vastausvaihtoehto: ${vastausvaihtoehdot}">
+                <span th:text="${vastausvaihtoehto.teksti}">Tässä pitäisi olla vastausvaihtoehto.</span> 
+                <strong th:text="${vastausvaihtoehto.oikein} ? 'Oikein' : 'Väärin'">Vasein</strong>
+                <form><input type="submit" value="Poista"/></form>
+            </li>
+        </ul>
+        
+        <h2>Luo uusi vastausvaihtoehto</h2>
+
+        <form>
+          <table>
+            <tr>
+              <td>
+                Vastausteksti:
+              </td>
+              <td>
+                  <input type="text" name="teksti"/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Oikein:
+              </td>
+              <td>
+                  <input type="checkbox" name="oikein"/>
+              </td>
+            </tr>
+          </table>
+
+          <input type="submit" value="Luo"/>
+        </form>
+
+        <ul>
+          <li>
+            <a href="../../">Kysymysten listaukseen</a>
+          </li>
+        </ul>
+    </body>
+    
+</html>
