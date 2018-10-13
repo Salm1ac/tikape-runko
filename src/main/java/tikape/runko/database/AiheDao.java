@@ -78,5 +78,37 @@ public class AiheDao implements Dao<Aihe, Integer> {
         stmt.close();
         connection.close();
     }
+    
+    @Override
+    public Aihe save(Aihe object) throws SQLException {
+        Aihe byName = findByName(object.getNimi());
+
+        if (byName != null) {
+            return byName;
+        } 
+
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Aihe (kurssi_id, nimi) VALUES (?, ?)");
+            stmt.setInt(1, object.getKurssiId());
+            stmt.setString(2, object.getNimi());
+            stmt.executeUpdate();
+        }
+
+        return findByName(object.getNimi());
+    }
+    
+    private Aihe findByName(String nimi) throws SQLException {
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT id, kurssi_id, nimi FROM Aihe WHERE nimi = ?");
+            stmt.setString(1, nimi);
+
+            ResultSet result = stmt.executeQuery();
+            if (!result.next()) {
+                return null;
+            }
+
+            return new Aihe(result.getInt("id"), result.getInt("kurssi_id"), result.getString("nimi"));
+        }
+    }
 
 }

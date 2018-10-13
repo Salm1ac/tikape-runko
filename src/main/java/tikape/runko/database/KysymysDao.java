@@ -78,5 +78,37 @@ public class KysymysDao implements Dao<Kysymys, Integer> {
         stmt.close();
         connection.close();
     }
+    
+    @Override
+    public Kysymys save(Kysymys object) throws SQLException {
+        Kysymys byText = findByName(object.getTeksti());
+
+        if (byText != null) {
+            return byText;
+        } 
+
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Kysymys (aihe_id, teksti) VALUES (?, ?)");
+            stmt.setInt(1, object.getAiheId());
+            stmt.setString(2, object.getTeksti());
+            stmt.executeUpdate();
+        }
+
+        return findByName(object.getTeksti());
+    }
+    
+    private Kysymys findByName(String teksti) throws SQLException {
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT id, aihe_id, teksti FROM Kysymys WHERE teksti = ?");
+            stmt.setString(1, teksti);
+
+            ResultSet result = stmt.executeQuery();
+            if (!result.next()) {
+                return null;
+            }
+
+            return new Kysymys(result.getInt("id"), result.getInt("aihe_id"), result.getString("nimi"));
+        }
+    }
 
 }

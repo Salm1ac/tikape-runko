@@ -80,5 +80,41 @@ public class VastausvaihtoehtoDao implements Dao<Vastausvaihtoehto, Integer> {
         stmt.close();
         connection.close();
     }
+    
+    @Override
+    public Vastausvaihtoehto save(Vastausvaihtoehto object) throws SQLException {
+        Vastausvaihtoehto byText = findByName(object.getTeksti());
+
+        if (byText != null) {
+            return byText;
+        } 
+
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(
+                    "INSERT INTO Vastausvaihtoehto (kysymys_id, teksti, oikein) VALUES (?, ?, ?)");
+            stmt.setInt(1, object.getKysymysId());
+            stmt.setString(2, object.getTeksti());
+            stmt.setBoolean(3, object.isOikein());
+            stmt.executeUpdate();
+        }
+
+        return findByName(object.getTeksti());
+    }
+    
+    private Vastausvaihtoehto findByName(String teksti) throws SQLException {
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(
+                    "SELECT id, kysymys_id, teksti, oikein FROM Vastausvaihtoehto WHERE teksti = ?");
+            stmt.setString(1, teksti);
+
+            ResultSet result = stmt.executeQuery();
+            if (!result.next()) {
+                return null;
+            }
+
+            return new Vastausvaihtoehto(result.getInt("id"), result.getInt("kysymys_id"),
+                    result.getString("nimi"), result.getBoolean("oikein"));
+        }
+    }
 
 }

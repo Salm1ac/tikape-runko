@@ -68,6 +68,38 @@ public class KurssiDao implements Dao<Kurssi, Integer> {
     }
 
     @Override
+    public Kurssi save(Kurssi object) throws SQLException {
+        Kurssi byName = findByName(object.getNimi());
+
+        if (byName != null) {
+            return byName;
+        } 
+
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Kurssi (nimi) VALUES (?)");
+            stmt.setString(1, object.getNimi());
+            stmt.executeUpdate();
+        }
+
+        return findByName(object.getNimi());
+    }
+    
+    private Kurssi findByName(String nimi) throws SQLException {
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT id, nimi FROM Kurssi WHERE nimi = ?");
+            stmt.setString(1, nimi);
+
+            ResultSet result = stmt.executeQuery();
+            if (!result.next()) {
+                return null;
+            }
+
+            return new Kurssi(result.getInt("id"), result.getString("nimi"));
+        }
+    }
+    
+
+    @Override
     public void delete(Integer key) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("DELETE FROM Kurssi WHERE id=?");
