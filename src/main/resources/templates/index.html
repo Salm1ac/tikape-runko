@@ -2,12 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Otsikko</title>
+        <title>Kysymyskontti</title>
         <meta charset="utf-8" />
     </head>
 
     <body>
-        <h1>Heippa vaan!</h1>
+        <h2>Kysymykset</h2>
+        
+        <th:block th:each="kurssi: ${kurssit}">
+            <h3>
+                Kurssi: <span th:text="${kurssi.nimi}">Tässä pitäisi olla kurssi</span>
+            </h3> 
+            <h4 th:each="aihe: ${aiheet}" th:if="${aihe.kurssiId} == ${kurssi.id}">
+                Aihe: <span th:text="${aihe.nimi}">Tässä pitäisi olla aihe</span>
+            </h4>
+            
+        </th:block>
+        
 
         <p>Ja .. <span th:text="${viesti}">jotain?</span></p>
 

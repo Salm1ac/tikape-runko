@@ -34,9 +34,10 @@ public class KysymysDao implements Dao<Kysymys, Integer> {
         }
 
         Integer id = rs.getInt("id");
+        Integer aiheId = rs.getInt("aihe_id");
         String nimi = rs.getString("nimi");
 
-        Kysymys k = new Kysymys(id, nimi);
+        Kysymys k = new Kysymys(id, aiheId, nimi);
 
         rs.close();
         stmt.close();
@@ -55,9 +56,10 @@ public class KysymysDao implements Dao<Kysymys, Integer> {
         List<Kysymys> kysymykset = new ArrayList<>();
         while (rs.next()) {
             Integer id = rs.getInt("id");
+            Integer aiheId = rs.getInt("aihe_id");
             String nimi = rs.getString("nimi");
 
-            kysymykset.add(new Kysymys(id, nimi));
+            kysymykset.add(new Kysymys(id, aiheId, nimi));
         }
 
         rs.close();

@@ -34,10 +34,11 @@ public class VastausvaihtoehtoDao implements Dao<Vastausvaihtoehto, Integer> {
         }
 
         Integer id = rs.getInt("id");
+        Integer kysymysId = rs.getInt("kysymys_id");
         String nimi = rs.getString("nimi");
         Boolean oikein = rs.getBoolean("oikein");
 
-        Vastausvaihtoehto v = new Vastausvaihtoehto(id, nimi, oikein);
+        Vastausvaihtoehto v = new Vastausvaihtoehto(id, kysymysId, nimi, oikein);
 
         rs.close();
         stmt.close();
@@ -56,10 +57,11 @@ public class VastausvaihtoehtoDao implements Dao<Vastausvaihtoehto, Integer> {
         List<Vastausvaihtoehto> vastausvaihtoehdot = new ArrayList<>();
         while (rs.next()) {
             Integer id = rs.getInt("id");
+            Integer kysymysId = rs.getInt("kysymys_id");
             String nimi = rs.getString("nimi");
             Boolean oikein = rs.getBoolean("oikein");
 
-            vastausvaihtoehdot.add(new Vastausvaihtoehto(id, nimi, oikein));
+            vastausvaihtoehdot.add(new Vastausvaihtoehto(id, kysymysId, nimi, oikein));
         }
 
         rs.close();

@@ -26,7 +26,9 @@ public class Main {
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("viesti", "tervehdys");
+            map.put("kurssit", kurssiDao.findAll());
+            map.put("aiheet", aiheDao.findAll());
+            map.put("kysymykset", kysymysDao.findAll());
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());

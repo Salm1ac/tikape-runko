@@ -12,11 +12,13 @@ package tikape.runko.domain;
 public class Vastausvaihtoehto {
     
     private Integer id;
+    private Integer kysymysId;
     private String teksti;
     private boolean oikein;
 
-    public Vastausvaihtoehto(Integer id, String teksti, boolean oikein) {
+    public Vastausvaihtoehto(Integer id, Integer kysymysId, String teksti, boolean oikein) {
         this.id = id;
+        this.kysymysId = kysymysId;
         this.teksti = teksti;
         this.oikein = oikein;
     }

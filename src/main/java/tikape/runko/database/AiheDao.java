@@ -34,9 +34,10 @@ public class AiheDao implements Dao<Aihe, Integer> {
         }
 
         Integer id = rs.getInt("id");
+        Integer kurssiId = rs.getInt("kurssi_id");
         String nimi = rs.getString("nimi");
 
-        Aihe a = new Aihe(id, nimi);
+        Aihe a = new Aihe(id, kurssiId, nimi);
 
         rs.close();
         stmt.close();
@@ -55,9 +56,10 @@ public class AiheDao implements Dao<Aihe, Integer> {
         List<Aihe> aiheet = new ArrayList<>();
         while (rs.next()) {
             Integer id = rs.getInt("id");
+            Integer kurssiId = rs.getInt("kurssi_id");
             String nimi = rs.getString("nimi");
 
-            aiheet.add(new Aihe(id, nimi));
+            aiheet.add(new Aihe(id, kurssiId, nimi));
         }
 
         rs.close();
