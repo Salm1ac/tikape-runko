@@ -16,12 +16,48 @@
             <h4 th:each="aihe: ${aiheet}" th:if="${aihe.kurssiId} == ${kurssi.id}">
                 Aihe: <span th:text="${aihe.nimi}">Tässä pitäisi olla aihe</span>
             </h4>
-            
+            <ul>
+                <li th:each="kysymys: ${kysymykset}" th:if="${kysymys.aiheId} == ${aihe.id}">
+                    <a th:href="@{~/kysymykset/{id}(id=${kysymys.id})}">
+                        <span th:text="${kysymys.nimi}">Tässä pitäisi olla kysymys</span>
+                    </a>
+                    <form><input type="submit" value="Poista"/></form>
+                </li>
+            </ul>
         </th:block>
         
 
-        <p>Ja .. <span th:text="${viesti}">jotain?</span></p>
+        <h2>Luo uusi kysymys</h2>
+        <form>
+          <table>
+            <tr>
+              <td>
+                Kurssi:
+              </td>
+              <td>
+                  <input type="text" name="kurssi"/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Aihe:
+              </td>
+              <td>
+                  <input type="text" name="aihe"/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Kysymysteksti:
+              </td>
+              <td>
+                  <input type="text" name="kysymysteksti"/>
+              </td>
+            </tr>
+          </table>
 
-        <p><a href="/opiskelijat">Tästä opiskelijalistaukseen.</a></p>
+          <input type="submit" value="Luo"/>
+        </form>
+        
     </body>
 </html>
