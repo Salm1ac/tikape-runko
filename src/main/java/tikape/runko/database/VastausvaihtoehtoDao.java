@@ -136,7 +136,7 @@ public class VastausvaihtoehtoDao implements Dao<Vastausvaihtoehto, Integer> {
             }
 
             return new Vastausvaihtoehto(result.getInt("id"), result.getInt("kysymys_id"),
-                    result.getString("nimi"), result.getBoolean("oikein"));
+                    result.getString("teksti"), result.getBoolean("oikein"));
         }
     }
 
