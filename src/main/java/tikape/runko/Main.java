@@ -6,6 +6,7 @@ import spark.Spark;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.*;
+import tikape.runko.domain.*;
 
 public class Main {
 
@@ -33,18 +34,19 @@ public class Main {
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
 
-        get("/opiskelijat", (req, res) -> {
+        get("/kysymys/:id", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("opiskelijat", kurssiDao.findAll());
+            Kysymys kysymys = kysymysDao.findOne(Integer.parseInt(req.params("id")));
+            map.put("kysymys", kysymys);
+            Aihe aihe = aiheDao.findOne(kysymys.getAiheId());
+            map.put("aihe", aihe.getNimi());
+            Kurssi kurssi = kurssiDao.findOne(aihe.getKurssiId());
+            map.put("kurssi", kurssi.getNimi());
+            
+            map.put("vastausvaihtoehdot", vastausvaihtoehtoDao
+                    .findAllMatchingKysymys(Integer.parseInt(req.params("id"))));
 
-            return new ModelAndView(map, "opiskelijat");
-        }, new ThymeleafTemplateEngine());
-
-        get("/opiskelijat/:id", (req, res) -> {
-            HashMap map = new HashMap<>();
-            map.put("opiskelija", kurssiDao.findOne(Integer.parseInt(req.params("id"))));
-
-            return new ModelAndView(map, "opiskelija");
+            return new ModelAndView(map, "kysymys");
         }, new ThymeleafTemplateEngine());
     }
 }
