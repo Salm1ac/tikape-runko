@@ -87,5 +87,11 @@ public class Main {
             return "";
         });
         
+        get("/errors/404.html", (req, res) -> {
+            HashMap map = new HashMap<>();
+            
+            return new ModelAndView(map, "404");
+        }, new ThymeleafTemplateEngine());
+        
     }
 }
