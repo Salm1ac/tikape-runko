@@ -26,7 +26,10 @@
             <li th:each="vastausvaihtoehto: ${vastausvaihtoehdot}">
                 <span th:text="${vastausvaihtoehto.teksti}">Tässä pitäisi olla vastausvaihtoehto.</span> 
                 <strong th:text="${vastausvaihtoehto.oikein} ? 'Oikein' : 'Väärin'">Vasein</strong>
-                <form><input type="submit" value="Poista"/></form>
+                <form method="POST" th:action="@{~/kysymykset/{kid}/vastaukset/{vid}/delete
+                      (kid=${kysymys.id},vid=${vastausvaihtoehto.id})}">
+                    <input type="submit" value="Poista"/>
+                </form>
             </li>
         </ul>
         

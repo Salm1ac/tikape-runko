@@ -78,5 +78,12 @@ public class Main {
             return ""; 
         });
         
+        post("/kysymykset/:kid/vastaukset/:vid/delete", (req, res) -> {
+            vastausvaihtoehtoDao.delete(Integer.parseInt(req.params("vid")));
+            
+            res.redirect("/kysymykset/:kid");
+            return "";
+        });
+        
     }
 }
