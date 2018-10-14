@@ -73,7 +73,7 @@ public class Main {
         post("/kysymykset/:id/vastaukset", (req, res) -> {
             Integer kurssiId = Integer.parseInt(req.params(":id"));
             String teksti = req.queryParams("teksti");
-            Boolean oikein = req.queryParams("oikein").equals("t");
+            Boolean oikein = Boolean.parseBoolean(req.queryParams("oikein"));
             vastausvaihtoehtoDao.save(new Vastausvaihtoehto(-1, kurssiId, teksti, oikein));
             
             res.redirect("/kysymykset/" + req.params("id"));
