@@ -73,7 +73,7 @@ public class KurssiDao implements Dao<Kurssi, Integer> {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT DISTINCT Kurssi.id, Kurssi.nimi "
                 + "FROM Kurssi, Aihe, Kysymys WHERE Aihe.kurssi_id = Kurssi.id "
-                + "AND Kysymys.aihe_id = Aihe_id");
+                + "AND Kysymys.aihe_id = Aihe.id");
 
         ResultSet rs = stmt.executeQuery();
         List<Kurssi> kurssit = new ArrayList<>();
