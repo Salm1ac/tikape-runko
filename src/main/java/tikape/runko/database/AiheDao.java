@@ -74,7 +74,7 @@ public class AiheDao implements Dao<Aihe, Integer> {
 
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement(
-                "SELECT Aihe.id, Aihe.kurssi_id, Aihe.nimi "
+                "SELECT DISTINCT Aihe.id, Aihe.kurssi_id, Aihe.nimi "
                 + "FROM Aihe, Kysymys WHERE Kysymys.aihe_id = Aihe.id");
 
         ResultSet rs = stmt.executeQuery();

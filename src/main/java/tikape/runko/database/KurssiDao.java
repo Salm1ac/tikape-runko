@@ -71,7 +71,7 @@ public class KurssiDao implements Dao<Kurssi, Integer> {
     public List<Kurssi> findAllNonEmpty() throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT Kurssi.id, Kurssi.nimi "
+        PreparedStatement stmt = connection.prepareStatement("SELECT DISTINCT Kurssi.id, Kurssi.nimi "
                 + "FROM Kurssi, Aihe, Kysymys WHERE Aihe.kurssi_id = Kurssi.id "
                 + "AND Kysymys.aihe_id = Aihe_id");
 
