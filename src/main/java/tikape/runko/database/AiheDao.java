@@ -80,9 +80,9 @@ public class AiheDao implements Dao<Aihe, Integer> {
         ResultSet rs = stmt.executeQuery();
         List<Aihe> aiheet = new ArrayList<>();
         while (rs.next()) {
-            Integer id = rs.getInt("Aihe.id");
-            Integer kurssiId = rs.getInt("Aihe.kurssi_id");
-            String nimi = rs.getString("Aihe.nimi");
+            Integer id = rs.getInt("id");
+            Integer kurssiId = rs.getInt("kurssi_id");
+            String nimi = rs.getString("nimi");
 
             aiheet.add(new Aihe(id, kurssiId, nimi));
         }

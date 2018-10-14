@@ -78,8 +78,8 @@ public class KurssiDao implements Dao<Kurssi, Integer> {
         ResultSet rs = stmt.executeQuery();
         List<Kurssi> kurssit = new ArrayList<>();
         while (rs.next()) {
-            Integer id = rs.getInt("Kurssi.id");
-            String nimi = rs.getString("Kurssi.nimi");
+            Integer id = rs.getInt("id");
+            String nimi = rs.getString("nimi");
 
             kurssit.add(new Kurssi(id, nimi));
         }
