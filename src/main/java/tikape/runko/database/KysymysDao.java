@@ -107,7 +107,7 @@ public class KysymysDao implements Dao<Kysymys, Integer> {
                 return null;
             }
 
-            return new Kysymys(result.getInt("id"), result.getInt("aihe_id"), result.getString("nimi"));
+            return new Kysymys(result.getInt("id"), result.getInt("aihe_id"), result.getString("teksti"));
         }
     }
 
