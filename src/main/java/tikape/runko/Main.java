@@ -74,14 +74,14 @@ public class Main {
             vastausvaihtoehtoDao.save(new Vastausvaihtoehto(-1, Integer.parseInt(req.params("id")),
                 req.queryParams("teksti"), Boolean.getBoolean(req.queryParams("oikein"))));
             
-            res.redirect("/kysymykset/:id");
+            res.redirect("/kysymykset/" + req.params("id"));
             return ""; 
         });
         
         post("/kysymykset/:kid/vastaukset/:vid/delete", (req, res) -> {
             vastausvaihtoehtoDao.delete(Integer.parseInt(req.params("vid")));
             
-            res.redirect("/kysymykset/:kid");
+            res.redirect("/kysymykset/" + req.params("kid"));
             return "";
         });
         
