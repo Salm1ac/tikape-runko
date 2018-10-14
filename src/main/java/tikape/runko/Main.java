@@ -69,5 +69,14 @@ public class Main {
             res.redirect("/");
             return "";
         });
+        
+        post("/kysymykset/:id/vastaukset", (req, res) -> {
+            vastausvaihtoehtoDao.save(new Vastausvaihtoehto(-1, Integer.parseInt(req.params("id")),
+                req.queryParams("teksti"), Boolean.getBoolean(req.queryParams("oikein"))));
+            
+            res.redirect("/kysymykset/:id");
+            return ""; 
+        });
+        
     }
 }
