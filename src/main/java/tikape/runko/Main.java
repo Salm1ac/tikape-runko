@@ -33,6 +33,20 @@ public class Main {
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
+        
+        get("/kysymykset", (req, res) -> {
+           res.redirect("/");
+           return "";
+        });
+        
+        post("/kysymykset", (req, res) -> {
+            Kurssi kurssi = kurssiDao.save(new Kurssi(-1, req.queryParams("kurssi")));
+            Aihe aihe = aiheDao.save(new Aihe(-1, kurssi.getId(), req.queryParams("aihe")));
+            Kysymys kysymys = kysymysDao.save(new Kysymys(-1, aihe.getId(), req.queryParams("kysymysteksti")));
+            
+            res.redirect("/");
+            return "";
+        });
 
         get("/kysymykset/:id", (req, res) -> {
             HashMap map = new HashMap<>();
