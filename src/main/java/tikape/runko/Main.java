@@ -93,5 +93,13 @@ public class Main {
                 + "kirjoittamasi osoite tai <a href=\"/\">palaa etusivulle.</a></p>"
                 + "</body></html>");
         
+        internalServerError("<html><body>"
+                + "<h1>500 Internal Server Error</h1>"
+                + "<p>Jotain meni pieleen. Saattaa olla, että yritit kirjoittaa "
+                + "tekstikenttään liian pitkän tai kiellettyjä merkkejä sisältävän "
+                + "sanan. Voi myös vallan hyvin olla, että kehittäjä on mokannut.</p>"
+                + "<p><a href=\"/\">Palaa etusivulle</a></p>"
+                + "</body></html>");
+        
     }
 }
