@@ -87,6 +87,11 @@ public class Main {
             return "";
         });
         
+        notFound("<html><body>"
+                + "<h1>404 Not Found</h1>"
+                + "<p> Yritit päästä sivulle, jota ei ole olemassa. Tarkista "
+                + "kirjoittamasi osoite tai <a href=\"/\">palaa etusivulle.</a></p>"
+                + "</body></html>");
         
     }
 }
