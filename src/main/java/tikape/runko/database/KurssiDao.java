@@ -66,6 +66,30 @@ public class KurssiDao implements Dao<Kurssi, Integer> {
 
         return kurssit;
     }
+    
+    //Haetaan vain kurssit, joihin liittyy kysymyksiä
+    public List<Kurssi> findAllNonEmpty() throws SQLException {
+
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT Kurssi.id, Kurssi.nimi "
+                + "FROM Kurssi, Aihe, Kysymys WHERE Aihe.kurssi_id = Kurssi.id "
+                + "AND Kysymys.aihe_id = Aihe_id");
+
+        ResultSet rs = stmt.executeQuery();
+        List<Kurssi> kurssit = new ArrayList<>();
+        while (rs.next()) {
+            Integer id = rs.getInt("Kurssi.id");
+            String nimi = rs.getString("Kurssi.nimi");
+
+            kurssit.add(new Kurssi(id, nimi));
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return kurssit;
+    }
 
     @Override
     public Kurssi save(Kurssi object) throws SQLException {

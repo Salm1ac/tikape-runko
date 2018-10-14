@@ -21,7 +21,7 @@
                         <a th:href="@{~/kysymykset/{id}(id=${kysymys.id})}">
                             <span th:text="${kysymys.teksti}">Tässä pitäisi olla kysymys</span>
                         </a>
-                        <form><input type="submit" value="Poista"/></form>
+                        <form method="POST" action="@{~/kysymykset/{id}/delete(id=${kysymys.id})}"><input type="submit" value="Poista"/></form>
                     </li>
                 </ul>
             </th:block>

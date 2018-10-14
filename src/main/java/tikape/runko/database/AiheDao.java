@@ -68,6 +68,31 @@ public class AiheDao implements Dao<Aihe, Integer> {
 
         return aiheet;
     }
+    
+    //Haetaan vain aiheet, joihin liittyy kysymyksiä
+    public List<Aihe> findAllNonEmpty() throws SQLException {
+
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(
+                "SELECT Aihe.id, Aihe.kurssi_id, Aihe.nimi "
+                + "FROM Aihe, Kysymys WHERE Kysymys.aihe_id = Aihe.id");
+
+        ResultSet rs = stmt.executeQuery();
+        List<Aihe> aiheet = new ArrayList<>();
+        while (rs.next()) {
+            Integer id = rs.getInt("Aihe.id");
+            Integer kurssiId = rs.getInt("Aihe.kurssi_id");
+            String nimi = rs.getString("Aihe.nimi");
+
+            aiheet.add(new Aihe(id, kurssiId, nimi));
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return aiheet;
+    }
 
     @Override
     public void delete(Integer key) throws SQLException {

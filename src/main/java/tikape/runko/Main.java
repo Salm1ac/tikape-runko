@@ -27,8 +27,8 @@ public class Main {
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("kurssit", kurssiDao.findAll());
-            map.put("aiheet", aiheDao.findAll());
+            map.put("kurssit", kurssiDao.findAllNonEmpty());
+            map.put("aiheet", aiheDao.findAllNonEmpty());
             map.put("kysymykset", kysymysDao.findAll());
 
             return new ModelAndView(map, "index");
@@ -62,5 +62,12 @@ public class Main {
 
             return new ModelAndView(map, "kysymys");
         }, new ThymeleafTemplateEngine());
+        
+        post("/kysymykset/:id/delete", (req, res) -> {
+            kysymysDao.delete(Integer.parseInt(req.params("id")));
+            
+            res.redirect("/");
+            return "";
+        });
     }
 }
