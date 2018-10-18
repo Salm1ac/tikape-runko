@@ -17,6 +17,8 @@ public class Main {
             Spark.port(Integer.valueOf(System.getenv("PORT")));
         }
         
+        staticFiles.location("/public");
+        
         Database database = new Database("jdbc:sqlite:kysymyskontti.db");
         database.init();
 

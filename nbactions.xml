@@ -10,7 +10,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-Dfile.encoding=UTF-8 -classpath %classpath ${packageClassName}</exec.args>
+                <exec.args>-Dfile.encoding=UTF-8 -classpath %classpath tikape.runko.Main</exec.args>
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
