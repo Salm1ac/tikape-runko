@@ -46,6 +46,7 @@ public class AiheDao implements Dao<Aihe, Integer> {
         return a;
     }
 
+    // ei tällä hetkellä käytössä; haetaan vain kysymykselliset
     @Override
     public List<Aihe> findAll() throws SQLException {
 

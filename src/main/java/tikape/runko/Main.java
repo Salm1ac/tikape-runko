@@ -89,14 +89,22 @@ public class Main {
             return "";
         });
         
-        notFound("<html><body>"
-                + "<h1>404 Not Found</h1>"
+        notFound("<html><head>"
+                + "<title>Virhe 404</title>"
+                + "<link href=\"/css/style.css\""
+                + " media=\"all\" rel=\"stylesheet\" type=\"text/css\"/>"
+                + "<meta charset=\"utf-8\" /></head>"
+                + "<body><h1>404 Not Found</h1>"
                 + "<p> Yritit päästä sivulle, jota ei ole olemassa. Tarkista "
                 + "kirjoittamasi osoite tai <a href=\"/\">palaa etusivulle.</a></p>"
                 + "</body></html>");
         
-        internalServerError("<html><body>"
-                + "<h1>500 Internal Server Error</h1>"
+        internalServerError("<html><head>"
+                + "<title>Virhe 500</title>"
+                + "<link href=\"/css/style.css\""
+                + " media=\"all\" rel=\"stylesheet\" type=\"text/css\"/>"
+                + "<meta charset=\"utf-8\" /></head>"
+                + "<body><h1>500 Internal Server Error</h1>"
                 + "<p>Jotain meni pieleen. Saattaa olla, että yritit kirjoittaa "
                 + "tekstikenttään liian pitkän tai kiellettyjä merkkejä sisältävän "
                 + "sanan. Voi myös vallan hyvin olla, että kehittäjä on mokannut.</p>"

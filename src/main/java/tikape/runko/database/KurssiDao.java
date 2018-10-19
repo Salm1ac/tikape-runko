@@ -44,9 +44,10 @@ public class KurssiDao implements Dao<Kurssi, Integer> {
 
         return k;
     }
-
+    
+    // ei tällä hetkellä käytössä; haetaan vain kysymykselliset
     @Override
-    public List<Kurssi> findAll() throws SQLException {
+    public List<Kurssi> findAll() throws SQLException { 
 
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Kurssi");
